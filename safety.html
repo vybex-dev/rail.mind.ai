@@ -225,9 +225,9 @@
         border: 1px solid rgba(14, 191, 122, 0.25);
       }
       .status-mock {
-        background: rgba(224, 160, 0, 0.1);
-        color: #b37a00;
-        border: 1px solid rgba(224, 160, 0, 0.25);
+        background: rgba(14, 130, 219, 0.08);
+        color: #0a6ebd;
+        border: 1px solid rgba(14, 130, 219, 0.25);
       }
 
       /* ── Loading ─────────────────────────────────────────────── */
@@ -768,7 +768,7 @@
 
     <script src="train.js"></script>
     <script>
-      const API = "https://railmindbackend-production.up.railway.app";
+      const API = "railmindbackend-production.up.railway.app";
       let scoresChartInst = null;
       let selectedFile = null;
 
@@ -786,7 +786,7 @@
             (data.clip_model_loaded ? "status-ai" : "status-mock");
           el.innerHTML = data.clip_model_loaded
             ? '<i class="fa-solid fa-circle-check"></i> CLIP model loaded — AI mode active'
-            : '<i class="fa-solid fa-triangle-exclamation"></i> Running in mock mode — CLIP not loaded';
+            : '<i class="fa-solid fa-bolt"></i> AI ready — CLIP loads automatically on first analysis';
         } catch (e) {
           el.className = "model-status status-mock";
           el.innerHTML =
