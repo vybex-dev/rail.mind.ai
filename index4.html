@@ -14,6 +14,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
+    <link rel="icon" type="image/png" href="icon.png" />
     <link rel="stylesheet" href="train.css" />
     <style>
       /* ── Module Cards ──────────────────────────────────────────────── */
@@ -83,7 +84,7 @@
         font-size: 5rem;
         font-weight: 800;
         line-height: 1;
-        color: rgba(90, 217, 247, 0.1);
+        color: #1cc0e64f;
         pointer-events: none;
         user-select: none;
       }
@@ -152,7 +153,7 @@
 
       /* ── Hero panel-3 (3 modules active) ───────────────────────────── */
       .panel-mid {
-        left: 50%;
+        left: 49%;
         bottom: 174px;
         transform: translateX(-50%);
       }
@@ -233,14 +234,27 @@
         </button>
 
         <div class="nav-menu">
-          <a href="index.html">Home</a>
-          <a href="delay.html">Delay Predictor</a>
-          <a href="crowd.html">Station Commander</a>
-          <a href="safety.html">Track Safety</a>
-          <a href="#about">About</a>
-          <a href="#team">Team</a>
-          <a href="delay.html" class="nav-cta">Get Started</a>
+          <a href="/index4" style="color: var(--blue)"
+            ><i class="fa-solid fa-house"></i> Home</a
+          >
+          <a href="/delay"
+            ><i class="fa-solid fa-clock-rotate-left"></i> Delay Predictor</a
+          >
+          <a href="/crowd"
+            ><i class="fa-solid fa-tower-broadcast"></i> Station Commander</a
+          >
+          <a href="/safety"
+            ><i class="fa-solid fa-shield-halved"></i> Track Safety</a
+          >
+          <a href="/index%28maintenance%29">
+            <i class="fa-solid fa-heart-pulse section-icon"></i> Train Checkup
+          </a>
+          <a href="#about"> <i class="fa-solid fa-circle-info"></i> About </a>
+          <a href="#team"> <i class="fa-solid fa-users"></i> Team </a>
         </div>
+        <a class="nav-cta" href="#modules">
+          Get Started <i class="fa-solid fa-arrow-right"></i>
+        </a>
       </nav>
     </header>
 
@@ -255,16 +269,14 @@
 
           <h1>India's Smartest Railway Intelligence Platform</h1>
 
-          <p>
-            Three AI modules. One unified platform. Built for FAR AWAY 2026.
-          </p>
+          <p>Four AI modules. One unified platform. Built for FAR AWAY 2026.</p>
 
           <div class="hero-actions">
             <a href="delay.html" class="btn btn-primary"
               ><i class="fa-solid fa-clock-rotate-left"></i> Predict Delays</a
             >
             <a href="crowd.html" class="btn btn-secondary"
-              ><i class="fa-solid fa-users-viewfinder"></i> Station Commander</a
+              ><i class="fa-solid fa-tower-broadcast"></i> Station Commander</a
             >
           </div>
 
@@ -274,6 +286,8 @@
             <span>Crowd Forecasting</span>
             <span class="dot">●</span>
             <span>Track Safety</span>
+            <span class="dot">●</span>
+            <span>Train Checkup</span>
           </div>
         </div>
 
@@ -322,12 +336,12 @@
               </div>
             </div>
 
-            <!-- Panel 3: 3 AI Modules Active (new) -->
+            <!-- Panel 3: 4 AI Modules Active (new) -->
             <div class="floating-panel panel-mid">
               <i class="fa-solid fa-layer-group"></i>
               <div>
-                <strong>3 AI Modules Active</strong>
-                <small>Delay · Crowd · Safety</small>
+                <strong>4 AI Modules Active</strong>
+                <small>Delay · Crowd · Safety · Checkup</small>
               </div>
             </div>
           </div>
@@ -354,10 +368,10 @@
         </div>
       </section>
 
-      <!-- ════════════════════════ THREE AI MODULES ════════════════════════════ -->
+      <!-- ════════════════════════ FOUR AI MODULES ════════════════════════════ -->
       <section id="modules" class="section-shell modules-section">
         <div class="section-heading reveal">
-          <span>Three AI Modules</span>
+          <span><i class="fa-solid fa-microchip"></i>Four AI Modules</span>
           <h2>Every angle of railway intelligence, covered</h2>
           <p>
             From predicting delays to managing crowds to detecting track defects
@@ -386,7 +400,7 @@
           <div class="module-card reveal">
             <span class="module-card-number">02</span>
             <div class="module-icon-wrap">
-              <i class="fa-solid fa-users-viewfinder"></i>
+              <i class="fa-solid fa-tower-broadcast"></i>
             </div>
             <h3>Station Commander</h3>
             <p>
@@ -413,43 +427,153 @@
               Launch <i class="fa-solid fa-arrow-right"></i>
             </a>
           </div>
+          <!-- Card 4: Maintenance Scheduler -->
+          <div class="module-card reveal">
+            <span class="module-card-number">04</span>
+            <div class="module-icon-wrap">
+              <i class="fa-solid fa-heart-pulse section-icon"></i>
+            </div>
+            <h3>Train Checkup</h3>
+            <p>
+              AI-powered maintenance planning optimizes resource allocation and
+              scheduling for efficient track upkeep.
+            </p>
+            <a href="checkup.html" class="module-launch-btn">
+              Launch <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
         </div>
       </section>
 
       <!-- ══════════════════════════ WORKFLOW ══════════════════════════════════ -->
-      <section class="workflow section-shell workflow-updated">
-        <div class="section-heading reveal">
-          <span>System Workflow</span>
-          <h2>From raw input to intelligent action</h2>
+      <section class="workflow-new section-shell">
+        <!-- Header row -->
+        <div class="workflow-header reveal">
+          <div>
+            <span class="section-kicker"
+              ><i class="fa-solid fa-diagram-project"></i> System Workflow</span
+            >
+            <h2 class="workflow-title">
+              From raw input to<br /><span class="workflow-title-accent"
+                >intelligent action</span
+              >
+            </h2>
+          </div>
+          <p class="workflow-subtitle">
+            Five stages. Four AI engines. One unified decision layer for Indian
+            Railways.
+          </p>
         </div>
-        <div class="timeline">
-          <div class="timeline-step reveal">
-            <i class="fa-solid fa-database"></i>
-            <h3>Journey &amp; Sensor Data</h3>
+
+        <!-- Flow steps -->
+        <div class="workflow-flow reveal">
+          <!-- Step 1 -->
+          <div class="wf-step" data-step="01">
+            <div class="wf-card">
+              <div class="wf-icon-wrap wf-color-cyan">
+                <i class="fa-solid fa-database"></i>
+              </div>
+              <div class="wf-step-num">01</div>
+              <h3>Journey &amp; Sensor Data</h3>
+              <p>
+                50k+ journey records, IoT sensor streams &amp; track telemetry
+                ingested in real time.
+              </p>
+            </div>
+            <div class="wf-connector">
+              <div class="wf-connector-line"></div>
+              <i class="fa-solid fa-chevron-right wf-connector-arrow"></i>
+            </div>
           </div>
-          <div class="timeline-step reveal">
-            <i class="fa-solid fa-microchip"></i>
-            <h3>AI Detection Engine</h3>
+
+          <!-- Step 2 -->
+          <div class="wf-step" data-step="02">
+            <div class="wf-card">
+              <div class="wf-icon-wrap wf-color-blue">
+                <i class="fa-solid fa-microchip"></i>
+              </div>
+              <div class="wf-step-num">02</div>
+              <h3>AI Detection Engine</h3>
+              <p>
+                XGBoost delay models &amp; CLIP vision classifiers process data
+                in parallel.
+              </p>
+            </div>
+            <div class="wf-connector">
+              <div class="wf-connector-line"></div>
+              <i class="fa-solid fa-chevron-right wf-connector-arrow"></i>
+            </div>
           </div>
-          <div class="timeline-step reveal">
-            <i class="fa-solid fa-chart-pie"></i>
-            <h3>Risk &amp; Crowd Analysis</h3>
+
+          <!-- Step 3 -->
+          <div class="wf-step" data-step="03">
+            <div class="wf-card">
+              <div class="wf-icon-wrap wf-color-cyan">
+                <i class="fa-solid fa-chart-pie"></i>
+              </div>
+              <div class="wf-step-num">03</div>
+              <h3>Risk &amp; Crowd Analysis</h3>
+              <p>
+                Crowd forecasts fused with track defect scores to produce
+                composite risk signals.
+              </p>
+            </div>
+            <div class="wf-connector">
+              <div class="wf-connector-line"></div>
+              <i class="fa-solid fa-chevron-right wf-connector-arrow"></i>
+            </div>
           </div>
-          <div class="timeline-step reveal">
-            <i class="fa-solid fa-bolt"></i>
-            <h3>Smart Alerts &amp; Recommendations</h3>
+
+          <!-- Step 4 -->
+          <div class="wf-step" data-step="04">
+            <div class="wf-card">
+              <div class="wf-icon-wrap wf-color-blue">
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <div class="wf-step-num">04</div>
+              <h3>Smart Alerts &amp; Recommendations</h3>
+              <p>
+                Prioritised alerts dispatched to operations teams with
+                actionable guidance.
+              </p>
+            </div>
+            <div class="wf-connector">
+              <div class="wf-connector-line"></div>
+              <i class="fa-solid fa-chevron-right wf-connector-arrow"></i>
+            </div>
           </div>
-          <div class="timeline-step reveal">
-            <i class="fa-solid fa-table-columns"></i>
-            <h3>Unified RailMind Dashboard</h3>
+
+          <!-- Step 5 (no connector after) -->
+          <div class="wf-step wf-step-last" data-step="05">
+            <div class="wf-card wf-card-final">
+              <div class="wf-icon-wrap wf-color-final">
+                <i class="fa-solid fa-table-columns"></i>
+              </div>
+              <div class="wf-step-num">05</div>
+              <h3>Unified RailMind Dashboard</h3>
+              <p>
+                All signals unified in one live command view for instant
+                decision-making.
+              </p>
+              <span class="wf-final-badge"
+                ><i class="fa-solid fa-circle-check"></i> Live</span
+              >
+            </div>
           </div>
+        </div>
+
+        <!-- Bottom track motif -->
+        <div class="wf-track-bar reveal">
+          <div class="wf-track-rail"></div>
+          <div class="wf-track-sleepers"></div>
+          <div class="wf-track-rail"></div>
         </div>
       </section>
 
       <!-- ══════════════════════════ DASHBOARD ═════════════════════════════════ -->
       <section id="dashboard" class="dashboard-section section-shell">
         <div class="section-heading reveal">
-          <span>Dashboard Preview</span>
+          <span><i class="fa-solid fa-desktop"></i>Dashboard Preview</span>
           <h2>Mission control for railway intelligence</h2>
           <p>
             A focused operational view for health scores, active alerts, track
@@ -544,120 +668,536 @@
       </section>
 
       <!-- ══════════════════════════ TECH STACK ════════════════════════════════ -->
-      <section class="tech section-shell">
-        <div class="section-heading reveal">
-          <span>Technology Stack</span>
-          <h2>Intelligence layer for rail infrastructure</h2>
+      <section class="tech-new section-shell">
+        <!-- Header -->
+        <div class="tech-header reveal">
+          <div class="tech-header-left">
+            <span class="section-kicker"
+              ><i class="fa-solid fa-layer-group"></i> Technology Stack</span
+            >
+            <h2 class="tech-title">
+              Intelligence layer for<br /><span class="tech-title-accent"
+                >rail infrastructure</span
+              >
+            </h2>
+          </div>
+          <p class="tech-subtitle">
+            Five battle-tested technologies fused into one platform — built to
+            scale across Indian Railways.
+          </p>
         </div>
-        <div class="tech-grid">
-          <div class="tech-card reveal">
-            <i class="fa-solid fa-camera-retro"></i> Computer Vision
+
+        <!-- Main card grid -->
+        <div class="tech-new-grid reveal">
+          <!-- Computer Vision — tall featured card -->
+          <div class="tech-new-card tech-featured reveal">
+            <div class="tech-card-glow"></div>
+            <div class="tech-new-icon tech-icon-cyan">
+              <i class="fa-solid fa-camera-retro"></i>
+            </div>
+            <div class="tech-card-tag">Vision</div>
+            <h3>Computer Vision</h3>
+            <p>
+              Frame-by-frame track inspection using convolutional models trained
+              on real defect imagery.
+            </p>
+            <div class="tech-stat-bar">
+              <div class="tech-stat-label">
+                <span>Detection speed</span><span>38ms/frame</span>
+              </div>
+              <div class="tech-stat-track">
+                <div class="tech-stat-fill" style="width: 88%"></div>
+              </div>
+            </div>
+            <div class="tech-stat-bar">
+              <div class="tech-stat-label">
+                <span>Recall</span><span>99.1%</span>
+              </div>
+              <div class="tech-stat-track">
+                <div class="tech-stat-fill" style="width: 99%"></div>
+              </div>
+            </div>
           </div>
-          <div class="tech-card reveal">
-            <i class="fa-solid fa-brain"></i> XGBoost ML
+
+          <!-- XGBoost ML -->
+          <div class="tech-new-card reveal">
+            <div class="tech-card-glow"></div>
+            <div class="tech-new-icon tech-icon-blue">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <div class="tech-card-tag">ML Model</div>
+            <h3>XGBoost ML</h3>
+            <p>
+              Gradient-boosted trees trained on 50,000 journeys for precision
+              delay prediction.
+            </p>
+            <div class="tech-stat-bar">
+              <div class="tech-stat-label">
+                <span>Accuracy</span><span>94.2%</span>
+              </div>
+              <div class="tech-stat-track">
+                <div class="tech-stat-fill" style="width: 94%"></div>
+              </div>
+            </div>
           </div>
-          <div class="tech-card reveal">
-            <i class="fa-solid fa-network-wired"></i> CLIP Vision AI
+
+          <!-- CLIP Vision AI -->
+          <div class="tech-new-card reveal">
+            <div class="tech-card-glow"></div>
+            <div class="tech-new-icon tech-icon-cyan">
+              <i class="fa-solid fa-network-wired"></i>
+            </div>
+            <div class="tech-card-tag">Multimodal AI</div>
+            <h3>CLIP Vision AI</h3>
+            <p>
+              OpenAI CLIP embeddings classify track defects from raw camera
+              feeds without labelled data.
+            </p>
+            <div class="tech-stat-bar">
+              <div class="tech-stat-label">
+                <span>Zero-shot accuracy</span><span>91%</span>
+              </div>
+              <div class="tech-stat-track">
+                <div class="tech-stat-fill" style="width: 91%"></div>
+              </div>
+            </div>
           </div>
-          <div class="tech-card reveal">
-            <i class="fa-solid fa-cloud"></i> Cloud Analytics
+
+          <!-- Cloud Analytics -->
+          <div class="tech-new-card reveal">
+            <div class="tech-card-glow"></div>
+            <div class="tech-new-icon tech-icon-blue">
+              <i class="fa-solid fa-cloud"></i>
+            </div>
+            <div class="tech-card-tag">Infrastructure</div>
+            <h3>Cloud Analytics</h3>
+            <p>
+              Scalable serverless pipelines aggregate multi-source data and
+              serve dashboards at low latency.
+            </p>
+            <div class="tech-stat-bar">
+              <div class="tech-stat-label">
+                <span>Uptime</span><span>99.9%</span>
+              </div>
+              <div class="tech-stat-track">
+                <div class="tech-stat-fill" style="width: 99%"></div>
+              </div>
+            </div>
           </div>
-          <div class="tech-card reveal">
-            <i class="fa-solid fa-tower-broadcast"></i> Real-Time Monitoring
+
+          <!-- Real-Time Monitoring -->
+          <div class="tech-new-card reveal">
+            <div class="tech-card-glow"></div>
+            <div class="tech-new-icon tech-icon-green">
+              <i class="fa-solid fa-tower-broadcast"></i>
+            </div>
+            <div class="tech-card-tag">Live</div>
+            <h3>Real-Time Monitoring</h3>
+            <p>
+              WebSocket streams push live station crowd counts and alert signals
+              to the dashboard instantly.
+            </p>
+            <div class="tech-stat-bar">
+              <div class="tech-stat-label">
+                <span>Latency</span><span>&lt; 200ms</span>
+              </div>
+              <div class="tech-stat-track">
+                <div
+                  class="tech-stat-fill tech-stat-fill-green"
+                  style="width: 96%"
+                ></div>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <!-- Bottom badge strip -->
+        <div class="tech-badge-strip reveal">
+          <span class="tech-badge-item"
+            ><i class="fa-brands fa-python"></i> Python</span
+          >
+          <span class="tech-badge-item"
+            ><i class="fa-solid fa-fire"></i> PyTorch</span
+          >
+
+          <span class="tech-badge-item"
+            ><i class="fa-solid fa-server"></i> FastAPI</span
+          >
         </div>
       </section>
-
       <!-- ══════════════════════════ ABOUT ═════════════════════════════════════ -->
-      <section id="about" class="about section-shell">
-        <div class="about-card reveal">
-          <div>
-            <span class="section-kicker">About Project</span>
-            <h2>Hackathon-built railway intelligence for FAR AWAY 2026</h2>
+      <section id="about" class="about-new section-shell">
+        <!-- Section label -->
+        <div class="about-eyebrow reveal">
+          <span class="section-kicker"
+            ><i class="fa-solid fa-circle-info"></i> About Project</span
+          >
+        </div>
+
+        <div class="about-new-grid reveal">
+          <!-- Left: headline + mission pillars -->
+          <div class="about-left">
+            <h2 class="about-headline">
+              Hackathon-built<br />
+              <span class="about-headline-accent">railway intelligence</span
+              ><br />
+              for FAR AWAY 2026
+            </h2>
+
+            <!-- 3 mission pillars -->
+            <div class="about-pillars">
+              <div class="about-pillar">
+                <div class="about-pillar-icon">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+                <div>
+                  <strong>Delay Prediction</strong>
+                  <span>XGBoost · 50,000 journeys trained</span>
+                </div>
+              </div>
+              <div class="about-pillar">
+                <div class="about-pillar-icon">
+                  <i class="fa-solid fa-tower-broadcast"></i>
+                </div>
+                <div>
+                  <strong>Crowd Forecasting</strong>
+                  <span>Real-time · 5 major stations</span>
+                </div>
+              </div>
+              <div class="about-pillar">
+                <div class="about-pillar-icon">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                  <strong>Track Safety</strong>
+                  <span>CLIP Vision · 99.1% defect recall</span>
+                </div>
+              </div>
+              <div class="about-pillar">
+                <div class="about-pillar-icon">
+                  <i class="fa-solid fa-heartbeat"></i>
+                </div>
+                <div>
+                  <strong>Train Checkup</strong>
+                  <span>AI Powered · 95.7% correct diagnosis</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <p>
-            RailMind AI is a unified railway intelligence platform built for the
-            FAR AWAY 2026 hackathon. It brings together three specialised AI
-            modules — delay prediction using XGBoost trained on 50,000 journeys,
-            real-time crowd forecasting for 5 major stations, and CLIP-powered
-            track defect classification — into one cohesive product. The goal:
-            give Indian Railways operations teams the fastest, sharpest
-            decision-making layer possible.
-          </p>
+
+          <!-- Right: description + stat highlights -->
+          <div class="about-right">
+            <p class="about-body">
+              RailMind AI is a unified railway intelligence platform built for
+              the FAR AWAY 2026 hackathon. It brings together four specialised
+              AI modules into one cohesive product — giving Indian Railways
+              operations teams the fastest, sharpest decision-making layer
+              possible.
+            </p>
+
+            <!-- Highlight stat cards -->
+            <div class="about-highlights">
+              <div class="about-highlight-card">
+                <strong>94.2<span>%</span></strong>
+                <p>Prediction accuracy</p>
+              </div>
+              <div class="about-highlight-card">
+                <strong>50k</strong>
+                <p>Journeys analysed</p>
+              </div>
+              <div class="about-highlight-card">
+                <strong>4</strong>
+                <p>AI modules unified</p>
+              </div>
+            </div>
+
+            <a href="#modules" class="about-cta-btn">
+              Explore the Platform <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
         </div>
       </section>
 
       <!-- ══════════════════════════ TEAM ══════════════════════════════════════ -->
       <section id="team" class="team-strip section-shell">
-        <div class="section-heading reveal">
-          <span>Team</span>
-          <h2>Product, AI, and engineering working together</h2>
+        <div
+          class="section-heading reveal visible"
+          style="transition-delay: 70ms"
+        >
+          <span><i class="fa-solid fa-users"></i>Team</span>
+          <h2>Meet the minds behind RailMind AI</h2>
         </div>
         <div class="team-grid">
-          <div class="team-card reveal">
-            <i class="fa-solid fa-user-gear"></i><strong>AI Engineer</strong
-            ><small>Detection &amp; prediction models</small>
+          <!-- Jay -->
+          <div class="team-card reveal visible" style="transition-delay: 140ms">
+            <span class="team-number">01</span>
+            <div class="team-avatar">J</div>
+            <strong>Jay</strong>
+            <span class="team-role">Frontend Developer</span>
+            <small
+              >UI/UX design, dashboard interface &amp; platform
+              experience</small
+            >
+            <div class="team-socials">
+              <a href="#" aria-label="GitHub"
+                ><i class="fa-brands fa-github"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+            </div>
           </div>
-          <div class="team-card reveal">
-            <i class="fa-solid fa-user-shield"></i
-            ><strong>Safety Analyst</strong
-            ><small>Risk logic &amp; defect classes</small>
+
+          <!-- Harsh -->
+          <div class="team-card reveal visible" style="transition-delay: 210ms">
+            <span class="team-number">02</span>
+            <div class="team-avatar">H</div>
+            <strong>Harsh</strong>
+            <span class="team-role">Backend Developer</span>
+            <small
+              >API architecture, Data pipelines, AI &amp; ML model
+              integration</small
+            >
+            <div class="team-socials">
+              <a href="#" aria-label="GitHub"
+                ><i class="fa-brands fa-github"></i
+              ></a>
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+            </div>
           </div>
-          <div class="team-card reveal">
-            <i class="fa-solid fa-code"></i><strong>Frontend Developer</strong
-            ><small>Dashboard UI &amp; platform</small>
+
+          <!-- Atharv -->
+          <div class="team-card reveal visible" style="transition-delay: 280ms">
+            <span class="team-number">03</span>
+            <div class="team-avatar">A</div>
+            <strong>Atharv</strong>
+            <span class="team-role">Presentation Lead</span>
+            <small
+              >Pitch decks, demo video production &amp; hackathon
+              storytelling</small
+            >
+            <div class="team-socials">
+              <a href="#" aria-label="LinkedIn"
+                ><i class="fa-brands fa-linkedin-in"></i
+              ></a>
+              <a href="#" aria-label="YouTube"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
     <!-- ═══════════════════════════════ FOOTER ══════════════════════════════════ -->
-    <footer id="contact" class="footer">
-      <div class="footer-grid">
-        <div>
-          <a href="index.html" class="logo">
-            <span class="logo-mark"
-              ><i class="fa-solid fa-train-subway"></i
-            ></span>
-            <span>RailMind AI</span>
-          </a>
-          <p>
-            Three AI modules. One railway intelligence platform. Built for FAR
-            AWAY 2026.
-          </p>
-          <div class="socials">
-            <a href="#" aria-label="LinkedIn"
-              ><i class="fa-brands fa-linkedin-in"></i
-            ></a>
-            <a href="#" aria-label="GitHub"
-              ><i class="fa-brands fa-github"></i
-            ></a>
-            <a href="#" aria-label="X"
-              ><i class="fa-brands fa-x-twitter"></i
-            ></a>
+    <footer id="contact" class="footer-new">
+      <!-- Live status ticker bar -->
+      <div class="footer-ticker">
+        <div class="ticker-inner">
+          <span class="ticker-label"
+            ><i class="fa-solid fa-circle-dot"></i> LIVE</span
+          >
+          <div class="ticker-track">
+            <div class="ticker-items">
+              <span
+                ><i class="fa-solid fa-train-subway"></i> Delay Predictor —
+                94.2% accuracy · 50k journeys analysed</span
+              >
+              <span
+                ><i class="fa-solid fa-tower-broadcast"></i> Station Commander —
+                Real-time crowd data · 5 major stations</span
+              >
+              <span
+                ><i class="fa-solid fa-shield-halved"></i> Track Safety — CLIP
+                vision · 99.1% defect recall</span
+              >
+              <span
+                ><i class="fa-solid fa-bolt"></i> All systems operational · FAR
+                AWAY 2026</span
+              >
+              <span
+                ><i class="fa-solid fa-train-subway"></i> Delay Predictor —
+                94.2% accuracy · 50k journeys analysed</span
+              >
+              <span
+                ><i class="fa-solid fa-tower-broadcast"></i> Station Commander —
+                Real-time crowd data · 5 major stations</span
+              >
+              <span
+                ><i class="fa-solid fa-shield-halved"></i> Track Safety — CLIP
+                vision · 99.1% defect recall</span
+              >
+              <span
+                ><i class="fa-solid fa-bolt"></i> All systems operational · FAR
+                AWAY 2026</span
+              >
+            </div>
           </div>
         </div>
-        <div>
-          <h3>AI Modules</h3>
-          <a href="delay.html">Delay Predictor</a>
-          <a href="crowd.html">Station Commander</a>
-          <a href="safety.html">Track Safety</a>
+      </div>
+
+      <!-- Rail track divider -->
+      <div class="footer-rail-divider">
+        <div class="rail-line left"></div>
+        <div class="rail-train-icon">
+          <i class="fa-solid fa-train-subway"></i>
         </div>
-        <div>
-          <h3>Platform</h3>
-          <a href="#dashboard">Dashboard</a>
-          <a href="#about">About</a>
-          <a href="#team">Team</a>
-        </div>
-        <div>
-          <h3>Contact</h3>
-          <p><i class="fa-solid fa-envelope"></i> hello@railmind.ai</p>
-          <p><i class="fa-solid fa-location-dot"></i> India</p>
-          <p><i class="fa-solid fa-phone"></i> +91 90000 00000</p>
+        <div class="rail-line right"></div>
+      </div>
+
+      <!-- Main footer body -->
+      <div class="footer-body">
+        <div class="footer-new-grid">
+          <!-- Brand column -->
+          <div class="footer-brand-col">
+            <a href="index.html" class="footer-logo">
+              <span class="footer-logo-mark"
+                ><i class="fa-solid fa-train-subway"></i
+              ></span>
+              <span>RailMind AI</span>
+            </a>
+            <p class="footer-tagline">
+              Four AI modules. One railway intelligence platform. Built for
+              India's future.
+            </p>
+
+            <!-- Stats row -->
+            <div class="footer-mini-stats">
+              <div class="footer-mini-stat">
+                <strong>50k</strong>
+                <span>Journeys</span>
+              </div>
+              <div class="footer-mini-stat">
+                <strong>5</strong>
+                <span>Stations</span>
+              </div>
+              <div class="footer-mini-stat">
+                <strong>4</strong>
+                <span>AI Modules</span>
+              </div>
+            </div>
+
+            <div class="footer-socials">
+              <a href="#" aria-label="LinkedIn" class="footer-social-btn">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+              <a href="#" aria-label="GitHub" class="footer-social-btn">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a href="#" aria-label="X / Twitter" class="footer-social-btn">
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- AI Modules column -->
+          <div class="footer-links-col">
+            <h4 class="footer-col-heading">
+              <span class="footer-col-dot cyan"></span>AI Modules
+            </h4>
+            <a href="delay.html" class="footer-link">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <span>Delay Predictor</span>
+              <i class="fa-solid fa-arrow-right footer-link-arrow"></i>
+            </a>
+            <a href="crowd.html" class="footer-link">
+              <i class="fa-solid fa-tower-broadcast"></i>
+              <span>Station Commander</span>
+              <i class="fa-solid fa-arrow-right footer-link-arrow"></i>
+            </a>
+            <a href="safety.html" class="footer-link">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>Track Safety</span>
+              <i class="fa-solid fa-arrow-right footer-link-arrow"></i>
+            </a>
+            <a href="checkup.html" class="footer-link">
+              <i class="fa-solid fa-heartbeat"></i>
+              <span>Train Checkup</span>
+              <i class="fa-solid fa-arrow-right footer-link-arrow"></i>
+            </a>
+          </div>
+
+          <!-- Platform column -->
+          <div class="footer-links-col">
+            <h4 class="footer-col-heading">
+              <span class="footer-col-dot blue"></span>Platform
+            </h4>
+            <a href="/index4" class="footer-link">
+              <i class="fa-solid fa-house"></i>
+              <span>Home</span>
+              <i class="fa-solid fa-arrow-right footer-link-arrow"></i>
+            </a>
+            <a href="#about" class="footer-link">
+              <i class="fa-solid fa-circle-info"></i>
+              <span>About Project</span>
+              <i class="fa-solid fa-arrow-right footer-link-arrow"></i>
+            </a>
+            <a href="#team" class="footer-link">
+              <i class="fa-solid fa-users"></i>
+              <span>Meet the Team</span>
+              <i class="fa-solid fa-arrow-right footer-link-arrow"></i>
+            </a>
+          </div>
+
+          <!-- Contact column -->
+          <div class="footer-contact-col">
+            <h4 class="footer-col-heading">
+              <span class="footer-col-dot white"></span>Get in Touch
+            </h4>
+            <a href="mailto:hello@railmind.ai" class="footer-contact-card">
+              <div class="footer-contact-icon">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <small>Email us</small>
+                <span>atharvadhamorikar@gmail.com</span>
+              </div>
+            </a>
+            <div class="footer-contact-card">
+              <div class="footer-contact-icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div>
+                <small>Based in</small>
+                <span>Indore, India 🇮🇳</span>
+              </div>
+            </div>
+            <a href="tel:+919000000000" class="footer-contact-card">
+              <div class="footer-contact-icon">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <small>Call us</small>
+                <span>+91 91094 02120</span>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
-      <div class="footer-bottom">
-        RailMind AI © 2026 · FAR AWAY Hackathon · Built for smarter railways.
+
+      <!-- Footer bottom bar -->
+      <div class="footer-new-bottom">
+        <div class="footer-bottom-inner">
+          <span class="footer-copy"
+            >© 2026 RailMind AI · FAR AWAY Hackathon</span
+          >
+          <div class="footer-bottom-badges">
+            <span class="footer-badge"
+              ><i class="fa-solid fa-brain"></i> XGBoost ML</span
+            >
+            <span class="footer-badge"
+              ><i class="fa-solid fa-eye"></i> CLIP Vision</span
+            >
+            <span class="footer-badge"
+              ><i class="fa-solid fa-cloud"></i> Cloud AI</span
+            >
+          </div>
+          <span class="footer-copy footer-built"
+            >Built for smarter railways 🚆</span
+          >
+        </div>
       </div>
     </footer>
 

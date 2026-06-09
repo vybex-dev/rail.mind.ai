@@ -36,7 +36,7 @@ const revealObserver = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.16 }
+  { threshold: 0.16 },
 );
 
 revealItems.forEach((item, index) => {
@@ -71,7 +71,7 @@ const counterObserver = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.5 }
+  { threshold: 0.5 },
 );
 
 counters.forEach((counter) => counterObserver.observe(counter));
@@ -88,9 +88,13 @@ if (maintenanceForm) {
   const statusBadge = document.querySelector("#statusBadge");
   const operationStatus = document.querySelector("#operationStatus");
   const safetyRuleViolations = document.querySelector("#safetyRuleViolations");
-  const measurementClassifications = document.querySelector("#measurementClassifications");
+  const measurementClassifications = document.querySelector(
+    "#measurementClassifications",
+  );
   const detectedIssues = document.querySelector("#detectedIssues");
-  const recommendationsList = document.querySelector("#maintenanceRecommendations");
+  const recommendationsList = document.querySelector(
+    "#maintenanceRecommendations",
+  );
   const analyzeButton = maintenanceForm.querySelector(".analyze-btn");
 
   const addListItems = (list, items) => {
@@ -112,13 +116,25 @@ if (maintenanceForm) {
       brake: { weight: 30, severities: [] },
       wheel: { weight: 25, severities: [] },
       electrical: { weight: 10, severities: [] },
-      safety: { weight: 10, severities: [] }
+      safety: { weight: 10, severities: [] },
     };
 
     const isBetween = (value, min, max) => value >= min && value <= max;
 
-    const classifyMetric = ({ component, label, value, unit, normal, warning, recommendation }) => {
-      const status = normal(value) ? "Normal" : warning(value) ? "Warning" : "Critical";
+    const classifyMetric = ({
+      component,
+      label,
+      value,
+      unit,
+      normal,
+      warning,
+      recommendation,
+    }) => {
+      const status = normal(value)
+        ? "Normal"
+        : warning(value)
+          ? "Warning"
+          : "Critical";
       const severity = status === "Normal" ? 0 : status === "Warning" ? 0.5 : 1;
 
       componentRisk[component].severities.push(severity);
@@ -144,7 +160,7 @@ if (maintenanceForm) {
       unit: " C",
       normal: (value) => value < 85,
       warning: (value) => isBetween(value, 85, 95),
-      recommendation: "Perform engine cooling maintenance."
+      recommendation: "Perform engine cooling maintenance.",
     });
 
     classifyMetric({
@@ -154,7 +170,8 @@ if (maintenanceForm) {
       unit: "%",
       normal: (value) => value >= 60,
       warning: (value) => value >= 30,
-      recommendation: "Refill oil and inspect the lubrication system for leakage."
+      recommendation:
+        "Refill oil and inspect the lubrication system for leakage.",
     });
 
     classifyMetric({
@@ -164,7 +181,8 @@ if (maintenanceForm) {
       unit: " PSI",
       normal: (value) => isBetween(value, 45, 75),
       warning: (value) => isBetween(value, 35, 85),
-      recommendation: "Inspect fuel filters, fuel lines, and pump pressure regulation."
+      recommendation:
+        "Inspect fuel filters, fuel lines, and pump pressure regulation.",
     });
 
     classifyMetric({
@@ -174,7 +192,8 @@ if (maintenanceForm) {
       unit: " mm/s",
       normal: (value) => value <= 4.5,
       warning: (value) => value <= 7.1,
-      recommendation: "Inspect engine mounts, bearings, and rotating components."
+      recommendation:
+        "Inspect engine mounts, bearings, and rotating components.",
     });
 
     classifyMetric({
@@ -184,7 +203,7 @@ if (maintenanceForm) {
       unit: " PSI",
       normal: (value) => isBetween(value, 90, 125),
       warning: (value) => isBetween(value, 70, 140),
-      recommendation: "Inspect braking system and restore operating pressure."
+      recommendation: "Inspect braking system and restore operating pressure.",
     });
 
     classifyMetric({
@@ -194,7 +213,7 @@ if (maintenanceForm) {
       unit: " mm",
       normal: (value) => value >= 12,
       warning: (value) => value >= 8,
-      recommendation: "Inspect braking system and replace worn brake pads."
+      recommendation: "Inspect braking system and replace worn brake pads.",
     });
 
     classifyMetric({
@@ -204,7 +223,8 @@ if (maintenanceForm) {
       unit: "%",
       normal: (value) => value <= 15,
       warning: (value) => value <= 30,
-      recommendation: "Schedule wheel profiling or replace worn wheel assembly."
+      recommendation:
+        "Schedule wheel profiling or replace worn wheel assembly.",
     });
 
     classifyMetric({
@@ -214,7 +234,8 @@ if (maintenanceForm) {
       unit: " mm",
       normal: (value) => value === 0,
       warning: (value) => value > 0 && value <= 2,
-      recommendation: "Replace worn wheel assembly and perform axle inspection."
+      recommendation:
+        "Replace worn wheel assembly and perform axle inspection.",
     });
 
     classifyMetric({
@@ -224,7 +245,8 @@ if (maintenanceForm) {
       unit: " V",
       normal: (value) => isBetween(value, 68, 78),
       warning: (value) => isBetween(value, 62, 84),
-      recommendation: "Check electrical subsystem and battery charging circuit."
+      recommendation:
+        "Check electrical subsystem and battery charging circuit.",
     });
 
     classifyMetric({
@@ -234,7 +256,8 @@ if (maintenanceForm) {
       unit: "%",
       normal: (value) => value <= 2,
       warning: (value) => value <= 5,
-      recommendation: "Check signal communication modules and antenna connections."
+      recommendation:
+        "Check signal communication modules and antenna connections.",
     });
 
     classifyMetric({
@@ -244,7 +267,7 @@ if (maintenanceForm) {
       unit: " PSI",
       normal: (value) => isBetween(value, 140, 180),
       warning: (value) => isBetween(value, 120, 200),
-      recommendation: "Replace or certify fire safety equipment."
+      recommendation: "Replace or certify fire safety equipment.",
     });
 
     classifyMetric({
@@ -254,7 +277,8 @@ if (maintenanceForm) {
       unit: " s",
       normal: (value) => value <= 5,
       warning: (value) => value <= 8,
-      recommendation: "Repair emergency exit release hardware before passenger service."
+      recommendation:
+        "Repair emergency exit release hardware before passenger service.",
     });
 
     classifyMetric({
@@ -264,77 +288,89 @@ if (maintenanceForm) {
       unit: " s",
       normal: (value) => value <= 2,
       warning: (value) => value <= 4,
-      recommendation: "Inspect door control system, sensors, and interlocks."
+      recommendation: "Inspect door control system, sensors, and interlocks.",
     });
 
     addSafetyViolation(
       data.wheelCrackLength > 2,
       `Wheel crack length ${data.wheelCrackLength} mm exceeds the critical threshold of 2 mm.`,
-      "Reject dispatch and replace worn wheel assembly before operation."
+      "Reject dispatch and replace worn wheel assembly before operation.",
     );
     addSafetyViolation(
       data.brakePressure < 60,
       `Brake pressure ${data.brakePressure} PSI is below the emergency threshold of 60 PSI.`,
-      "Reject dispatch and restore brake pressure before operation."
+      "Reject dispatch and restore brake pressure before operation.",
     );
     addSafetyViolation(
       data.engineTemperature > 105,
       `Engine temperature ${data.engineTemperature} C exceeds the emergency threshold of 105 C.`,
-      "Reject dispatch and perform engine cooling maintenance."
+      "Reject dispatch and perform engine cooling maintenance.",
     );
     addSafetyViolation(
-      data.fireExtinguisherPressure < 120 || data.fireExtinguisherPressure > 200,
+      data.fireExtinguisherPressure < 120 ||
+        data.fireExtinguisherPressure > 200,
       `Fire safety inspection failed: extinguisher pressure ${data.fireExtinguisherPressure} PSI is outside the certified 120-200 PSI range.`,
-      "Reject dispatch and replace or certify fire safety equipment."
+      "Reject dispatch and replace or certify fire safety equipment.",
     );
     addSafetyViolation(
       data.emergencyExitOpenTime > 8,
       `Emergency exit inspection failed: opening time ${data.emergencyExitOpenTime} s exceeds the critical threshold of 8 s.`,
-      "Reject dispatch and repair emergency exit release hardware."
+      "Reject dispatch and repair emergency exit release hardware.",
     );
 
     const riskScore = Math.round(
       Object.values(componentRisk).reduce((total, component) => {
-        const averageSeverity = component.severities.reduce((sum, severity) => sum + severity, 0) / component.severities.length;
+        const averageSeverity =
+          component.severities.reduce((sum, severity) => sum + severity, 0) /
+          component.severities.length;
         return total + averageSeverity * component.weight;
-      }, 0)
+      }, 0),
     );
 
     if (!issues.length) {
-      recommendations.add("Cleared for operation. Continue routine measurement logging.");
+      recommendations.add(
+        "Cleared for operation. Continue routine measurement logging.",
+      );
     }
 
-    const risk = safetyViolations.length || riskScore >= 61
-      ? {
-          className: "risk-high",
-          label: "HIGH RISK",
-          badge: "DO NOT OPERATE",
-          status: safetyViolations.length
-            ? "Train rejected by critical safety rule override."
-            : "Train rejected because the weighted risk score is in the 61-100 range."
-        }
-      : riskScore >= 31
+    const risk =
+      safetyViolations.length || riskScore >= 61
         ? {
-            className: "risk-medium",
-            label: "MEDIUM RISK",
-            badge: "INSPECTION REQUIRED",
-            status: "Inspection is required because the weighted risk score is in the 31-60 range."
+            className: "risk-high",
+            label: "HIGH RISK",
+            badge: "DO NOT OPERATE",
+            status: safetyViolations.length
+              ? "Train rejected by critical safety rule override."
+              : "Train rejected because the weighted risk score is in the 61-100 range.",
           }
-        : {
-            className: "risk-low",
-            label: "LOW RISK",
-            badge: "SAFE TO RUN",
-            status: "Weighted engineering risk score is in the 0-30 range. Train is safe to operate."
-          };
+        : riskScore >= 31
+          ? {
+              className: "risk-medium",
+              label: "MEDIUM RISK",
+              badge: "INSPECTION REQUIRED",
+              status:
+                "Inspection is required because the weighted risk score is in the 31-60 range.",
+            }
+          : {
+              className: "risk-low",
+              label: "LOW RISK",
+              badge: "SAFE TO RUN",
+              status:
+                "Weighted engineering risk score is in the 0-30 range. Train is safe to operate.",
+            };
 
     return {
       trainId: data.trainId,
       score: riskScore,
       risk,
-      safetyViolations: safetyViolations.length ? safetyViolations : ["No critical safety rule violations detected."],
+      safetyViolations: safetyViolations.length
+        ? safetyViolations
+        : ["No critical safety rule violations detected."],
       classifications,
-      issues: issues.length ? issues : ["No operational issues detected in mandatory inspection."],
-      recommendations: Array.from(recommendations)
+      issues: issues.length
+        ? issues
+        : ["No operational issues detected in mandatory inspection."],
+      recommendations: Array.from(recommendations),
     };
   };
 
@@ -376,7 +412,7 @@ if (maintenanceForm) {
       "signalPacketLoss",
       "fireExtinguisherPressure",
       "emergencyExitOpenTime",
-      "doorResponseTime"
+      "doorResponseTime",
     ].forEach((field) => {
       data[field] = Number(data[field]);
     });
@@ -384,14 +420,16 @@ if (maintenanceForm) {
     report.hidden = true;
     loading.hidden = false;
     analyzeButton.disabled = true;
-    analyzeButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Analyzing...';
+    analyzeButton.innerHTML =
+      '<i class="fa-solid fa-spinner fa-spin"></i> Analyzing...';
     loading.scrollIntoView({ behavior: "smooth", block: "center" });
 
     window.setTimeout(() => {
       const result = analyzeTrainHealth(data);
       loading.hidden = true;
       analyzeButton.disabled = false;
-      analyzeButton.innerHTML = '<i class="fa-solid fa-brain"></i> Analyze Train Health';
+      analyzeButton.innerHTML =
+        '<i class="fa-solid fa-brain"></i> Analyze Train Health';
       renderReport(result);
     }, 900);
   });
