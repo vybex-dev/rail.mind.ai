@@ -448,9 +448,30 @@
             <strong id="dashStationName">—</strong>
             <small id="dashStationSub">—</small>
           </div>
-          <div class="live-pill">
-            <div class="live-dot"></div>
-            Live Forecast
+          <div style="display: flex; align-items: center; gap: 10px">
+            <div class="live-pill">
+              <div class="live-dot"></div>
+              Live Forecast
+            </div>
+            <button
+              id="refreshBtn"
+              onclick="refreshStation()"
+              title="Refresh data"
+              style="
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: var(--cyan);
+                font-size: 14px;
+                padding: 4px 6px;
+                border-radius: 6px;
+                transition: opacity 0.2s;
+              "
+              onmouseover="this.style.opacity = '0.7'"
+              onmouseout="this.style.opacity = '1'"
+            >
+              <i class="fa-solid fa-rotate"></i>
+            </button>
           </div>
         </div>
         <div class="metrics-row">
@@ -545,6 +566,32 @@
           <h2>AI-recommended platform assignments</h2>
         </div>
         <div class="platform-grid" id="platformGrid"></div>
+        <div
+          id="advisorySection"
+          style="
+            display: none;
+            margin-top: 18px;
+            padding: 16px;
+            border-radius: 12px;
+            background: rgba(8, 124, 166, 0.06);
+            border: 1px solid var(--border);
+          "
+        >
+          <p
+            style="
+              font-size: 0.8rem;
+              font-weight: 700;
+              color: var(--muted);
+              margin-bottom: 6px;
+            "
+          >
+            <i class="fa-solid fa-robot"></i> RailMind Agent Advisory
+          </p>
+          <p
+            id="advisoryText"
+            style="font-size: 0.92rem; color: var(--navy); line-height: 1.6"
+          ></p>
+        </div>
       </div>
     </main>
 
@@ -592,6 +639,8 @@
       let forecastChartInst = null;
       let heatmapChartInst = null;
       let selectedStation = null;
+      let selectedStationName = "New Delhi";
+      let selectedStationPlatforms = 16;
 
       const STATIONS_FALLBACK = [
         { station_code: "NDLS", station_name: "New Delhi", platforms: 16 },
@@ -640,8 +689,28 @@
           setTimeout(() => el.classList.add("visible"), 100);
         });
 
-        // Auto-select NDLS
+        // Auto-select NDLS after building the grid
         selectStation("NDLS", "New Delhi", 16);
+      }
+
+      // ── POLISH 2: Refresh current station ───────────────────────
+      function refreshStation() {
+        if (selectedStation) {
+          const btn = document.getElementById("refreshBtn");
+          if (btn) {
+            btn.style.opacity = "0.4";
+            btn.style.pointerEvents = "none";
+            setTimeout(() => {
+              btn.style.opacity = "1";
+              btn.style.pointerEvents = "auto";
+            }, 1200);
+          }
+          selectStation(
+            selectedStation,
+            selectedStationName,
+            selectedStationPlatforms,
+          );
+        }
       }
 
       // ── Select station ───────────────────────────────────────────
@@ -651,10 +720,15 @@
           .forEach((b) => b.classList.remove("active"));
         const btn = document.querySelector(`.station-btn[onclick*="${code}"]`);
         if (btn) btn.classList.add("active");
+
+        // BUG 1 fix: store all three for fallback use
         selectedStation = code;
+        selectedStationName = name || code;
+        selectedStationPlatforms = platforms || 0;
 
         document.getElementById("dashboardSection").style.display = "none";
         document.getElementById("platformSection").style.display = "none";
+        document.getElementById("advisorySection").style.display = "none";
         document.getElementById("loadingPanel").style.display = "flex";
 
         try {
@@ -673,6 +747,13 @@
           document.getElementById("loadingPanel").style.display = "none";
           renderDashboard(forecast, heatmap, platforms);
           renderPlatforms(forecast.platform_allocation || []);
+
+          // POLISH 3: show advisory if present
+          if (forecast.advisory) {
+            document.getElementById("advisoryText").textContent =
+              forecast.advisory;
+            document.getElementById("advisorySection").style.display = "block";
+          }
         } catch (e) {
           document.getElementById("loadingPanel").style.display = "none";
           alert(
@@ -683,10 +764,13 @@
 
       // ── Render dashboard ─────────────────────────────────────────
       function renderDashboard(d, heatmap, platforms) {
+        // BUG 1 fix: safe fallbacks for station name and code
         document.getElementById("dashStationName").textContent =
-          d.station || "—";
+          d.station || d.station_name || selectedStationName || "—";
         document.getElementById("dashStationSub").textContent =
-          `${d.station_code} · Live Data`;
+          `${d.station_code || selectedStation || "—"} · Live Data`;
+
+        // BUG 3 fix: safe crowd count display
         document.getElementById("metricCrowd").textContent =
           d.current_estimated_crowd?.toLocaleString() || "—";
         document.getElementById("metricPlatforms").textContent = platforms;
@@ -710,22 +794,27 @@
           alertBanner.style.display = "none";
         }
 
-        // Forecast summary (next 2 hours)
+        // BUG 4 fix: guard forecast summary with fallback message
         const summary = document.getElementById("forecastSummary");
         const next2 = (d.forecast || []).slice(0, 2);
-        summary.innerHTML = next2
-          .map(
-            (f) => `
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,0.6);border:1px solid var(--border)">
-          <span style="font-size:0.84rem;font-weight:700;color:var(--navy)">${f.time_label}</span>
-          <span style="font-size:0.84rem;font-weight:700;color:var(--blue)">${f.crowd_count?.toLocaleString()} pax</span>
-          <span class="congestion-badge cong-${f.congestion_level}" style="padding:3px 9px;font-size:0.72rem">${f.congestion_level}</span>
-        </div>
-      `,
-          )
-          .join("");
+        if (!next2.length) {
+          summary.innerHTML =
+            '<p style="font-size:0.84rem;color:var(--muted)">No forecast data available.</p>';
+        } else {
+          summary.innerHTML = next2
+            .map(
+              (f) => `
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:8px;background:rgba(255,255,255,0.6);border:1px solid var(--border)">
+            <span style="font-size:0.84rem;font-weight:700;color:var(--navy)">${f.time_label}</span>
+            <span style="font-size:0.84rem;font-weight:700;color:var(--blue)">${f.crowd_count?.toLocaleString()} pax</span>
+            <span class="congestion-badge cong-${f.congestion_level}" style="padding:3px 9px;font-size:0.72rem">${f.congestion_level}</span>
+          </div>
+        `,
+            )
+            .join("");
+        }
 
-        // Forecast line chart
+        // BUG 2 fix: pass forecast array and heatmap object correctly
         renderForecastChart(d.forecast || []);
         renderHeatmapChart(heatmap);
 
@@ -738,7 +827,26 @@
       // ── Forecast line chart ──────────────────────────────────────
       function renderForecastChart(forecast) {
         if (forecastChartInst) forecastChartInst.destroy();
+
+        // BUG 2 fix: coerce values with Number() to avoid 0–1 scale
+        const mappedData = (forecast || []).map(
+          (f) => Number(f.crowd_count) || 0,
+        );
+
+        // Null-safety: show message if no data
         const ctx = document.getElementById("forecastChart").getContext("2d");
+        if (!mappedData.length || mappedData.every((v) => v === 0)) {
+          ctx.font = "14px Inter, sans-serif";
+          ctx.fillStyle = "#426c79";
+          ctx.textAlign = "center";
+          ctx.fillText(
+            "No forecast data available",
+            ctx.canvas.width / 2,
+            ctx.canvas.height / 2,
+          );
+          return;
+        }
+
         const colors = forecast.map((f) =>
           f.congestion_level === "high"
             ? "rgba(217,52,69,0.9)"
@@ -753,7 +861,7 @@
             datasets: [
               {
                 label: "Crowd Count",
-                data: forecast.map((f) => f.crowd_count),
+                data: mappedData,
                 borderColor: "#087ca6",
                 backgroundColor: "rgba(90,217,247,0.12)",
                 borderWidth: 2.5,
@@ -793,17 +901,31 @@
       // ── Heatmap bar chart ────────────────────────────────────────
       function renderHeatmapChart(heatmap) {
         if (heatmapChartInst) heatmapChartInst.destroy();
-        const ctx = document.getElementById("heatmapChart").getContext("2d");
-        const peakHours = new Set(
-          heatmap.heatmap?.peak_hours || [7, 8, 9, 17, 18, 19],
-        );
-        const hours = heatmap.heatmap?.hours || [];
-        const counts = heatmap.heatmap?.crowd_counts || [];
-        const labels =
-          heatmap.heatmap?.time_labels || hours.map((h) => `${h}h`);
+
+        // BUG 2 fix: unwrap nested heatmap object
+        const hd = heatmap.heatmap || heatmap;
+        const peakHours = new Set(hd.peak_hours || [7, 8, 9, 17, 18, 19, 20]);
+        const hours = hd.hours || [];
+        const counts = (hd.crowd_counts || []).map(Number);
+        const labels = hd.time_labels || hours.map((h) => `${h}h`);
         const bgColors = hours.map((h) =>
           peakHours.has(h) ? "rgba(217,52,69,0.7)" : "rgba(8,124,166,0.55)",
         );
+
+        const ctx = document.getElementById("heatmapChart").getContext("2d");
+
+        // Null-safety: show message if no data
+        if (!counts.length || counts.every((v) => v === 0)) {
+          ctx.font = "14px Inter, sans-serif";
+          ctx.fillStyle = "#426c79";
+          ctx.textAlign = "center";
+          ctx.fillText(
+            "No heatmap data available",
+            ctx.canvas.width / 2,
+            ctx.canvas.height / 2,
+          );
+          return;
+        }
 
         heatmapChartInst = new Chart(ctx, {
           type: "bar",
@@ -881,7 +1003,30 @@
       }
 
       // ── Init ─────────────────────────────────────────────────────
+      // POLISH 1: guaranteed auto-load — runs immediately, independent of
+      // whether loadStations() succeeds or fails
       loadStations();
+      // Belt-and-suspenders fallback: if loadStations fetch fails and
+      // selectStation was never called inside it, call it directly here.
+      // We use a flag set inside selectStation to avoid a double-load.
+      let _autoLoaded = false;
+      const _origSelect = selectStation;
+      // Wrap to detect first call
+      (function () {
+        const _realSelect = selectStation;
+        window._stationAutoLoad = setTimeout(() => {
+          if (!_autoLoaded) {
+            _realSelect("NDLS", "New Delhi", 16);
+          }
+        }, 3000);
+      })();
+      // Mark as loaded on first selectStation call
+      const _origSelectStation = selectStation;
+      selectStation = function (code, name, platforms) {
+        _autoLoaded = true;
+        clearTimeout(window._stationAutoLoad);
+        return _origSelectStation(code, name, platforms);
+      };
     </script>
   </body>
 </html>

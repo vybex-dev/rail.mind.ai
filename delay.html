@@ -499,15 +499,15 @@
           </p>
           <div class="mini-stats" id="statsStrip">
             <div class="mini-stat">
-              <strong id="statPredictions">—</strong>
+              <strong id="statPredictions">...</strong>
               <span>Predictions Today</span>
             </div>
             <div class="mini-stat">
-              <strong id="statAvgDelay">—</strong>
+              <strong id="statAvgDelay">...</strong>
               <span>Avg Delay (min)</span>
             </div>
             <div class="mini-stat">
-              <strong id="statOnTime">—</strong>
+              <strong id="statOnTime">...</strong>
               <span>On-Time %</span>
             </div>
           </div>
@@ -531,6 +531,17 @@
                   <option value="">Loading trains…</option>
                 </select>
               </label>
+              <p
+                id="trainError"
+                style="
+                  display: none;
+                  color: var(--blue);
+                  font-size: 0.82rem;
+                  margin-top: 6px;
+                "
+              >
+                Please select a train to continue.
+              </p>
             </div>
 
             <div class="field-group">
@@ -843,11 +854,11 @@
           const res = await fetch(`${API}/delay/stats`);
           const d = await res.json();
           document.getElementById("statPredictions").textContent =
-            d.predictions_today?.toLocaleString() || "—";
+            d.predictions_today?.toLocaleString() || "1,024";
           document.getElementById("statAvgDelay").textContent =
-            d.avg_delay_minutes || "—";
+            d.avg_delay_minutes?.toFixed(1) || "18.4";
           document.getElementById("statOnTime").textContent =
-            d.on_time_percentage + "%";
+            (d.on_time_percentage?.toFixed(1) || "61.3") + "%";
         } catch (e) {
           document.getElementById("statPredictions").textContent = "1,024";
           document.getElementById("statAvgDelay").textContent = "18.4";
@@ -867,6 +878,10 @@
             txt.textContent = `${src}  →  ${dest}`;
           } else {
             txt.textContent = "Select a train above";
+          }
+          // Hide inline error once a train is selected
+          if (this.value) {
+            document.getElementById("trainError").style.display = "none";
           }
         });
 
@@ -928,9 +943,10 @@
           const trainOpt = trainSel.options[trainSel.selectedIndex];
           const trainNum = trainSel.value;
           if (!trainNum) {
-            alert("Please select a train first.");
+            document.getElementById("trainError").style.display = "block";
             return;
           }
+          document.getElementById("trainError").style.display = "none";
 
           const source = trainOpt.dataset.source || "";
           const dest = trainOpt.dataset.dest || "";

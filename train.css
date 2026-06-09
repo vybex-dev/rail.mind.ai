@@ -25,10 +25,17 @@ html {
 body {
   min-height: 100vh;
   color: var(--text);
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   background:
     linear-gradient(120deg, rgba(255, 255, 255, 0.94), rgba(8, 124, 166, 0.82)),
-    url("https://unsplash.com/photos/jXnUjiJkQUE/download?force=true&w=1600") center / cover no-repeat;
+    url("https://unsplash.com/photos/jXnUjiJkQUE/download?force=true&w=1600")
+      center / cover no-repeat;
   overflow-x: hidden;
 }
 
@@ -143,7 +150,10 @@ a {
   border: 1px solid var(--border);
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
 .nav-cta {
@@ -218,7 +228,6 @@ a {
 .section-heading p,
 .about-card p,
 .footer p {
-    
   color: #ffffff;
   line-height: 1.7;
   font-size: 25px;
@@ -284,7 +293,11 @@ a {
   border: 1px solid var(--border);
   border-radius: 8px;
   background:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.42)),
+    linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.42)
+    ),
     radial-gradient(circle at top, rgba(8, 124, 166, 0.22), transparent 58%);
   box-shadow: var(--shadow);
   backdrop-filter: blur(22px);
@@ -438,7 +451,7 @@ a {
 .floating-panel small {
   display: block;
   margin-top: 4px;
-  color: var(--muted);
+  color: #3ea5c5;
 }
 
 .panel-top {
@@ -527,7 +540,11 @@ a {
 .about-card {
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: linear-gradient(150deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+  background: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.06)
+  );
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
   backdrop-filter: blur(18px);
 }
@@ -535,14 +552,21 @@ a {
 .feature-card {
   min-height: 258px;
   padding: 26px;
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
 }
 
 .feature-card:hover,
 .tech-card:hover,
 .team-card:hover {
   border-color: rgba(76, 228, 255, 0.6);
-  background: linear-gradient(150deg, rgba(8, 124, 166, 0.14), rgba(255, 255, 255, 0.78));
+  background: linear-gradient(
+    150deg,
+    rgba(8, 124, 166, 0.14),
+    rgba(255, 255, 255, 0.78)
+  );
 }
 
 .feature-icon {
@@ -629,7 +653,11 @@ a {
   border: 1px solid var(--border);
   border-radius: 8px;
   background:
-    linear-gradient(140deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.52)),
+    linear-gradient(
+      140deg,
+      rgba(255, 255, 255, 0.82),
+      rgba(255, 255, 255, 0.52)
+    ),
     radial-gradient(circle at 85% 10%, rgba(8, 124, 166, 0.18), transparent 34%);
   box-shadow: var(--shadow);
   backdrop-filter: blur(22px);
@@ -658,7 +686,7 @@ a {
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  color:black;
+  color: black;
   border: 1px solid rgba(56, 247, 161, 0.34);
   border-radius: 8px;
   background: rgba(0, 0, 0, 12%);
@@ -706,7 +734,10 @@ a {
   place-items: center;
   margin-bottom: 16px;
   border-radius: 50%;
-  background: conic-gradient(var(--cyan) 0 92%, rgba(255, 255, 255, 0.14) 92% 100%);
+  background: conic-gradient(
+    var(--cyan) 0 92%,
+    rgba(255, 255, 255, 0.14) 92% 100%
+  );
 }
 
 .radial-score span {
@@ -739,7 +770,7 @@ a {
 }
 
 .warn {
-  color:#5e4b1e;
+  color: #5e4b1e;
 }
 
 .risk-bar {
@@ -749,7 +780,7 @@ a {
   background: rgba(255, 255, 255, 0.12);
 }
 
-.risk-bar span {    
+.risk-bar span {
   display: block;
   height: 100%;
   border-radius: inherit;
@@ -788,7 +819,8 @@ a {
   border-left: 1px solid rgba(8, 124, 166, 0.26);
   border-bottom: 1px solid rgba(8, 124, 166, 0.26);
   background:
-    linear-gradient(to bottom, rgba(8, 124, 166, 0.15) 1px, transparent 1px) 0 0 / 100% 33.33%,
+    linear-gradient(to bottom, rgba(8, 124, 166, 0.15) 1px, transparent 1px) 0
+      0 / 100% 33.33%,
     rgba(255, 255, 255, 0.28);
 }
 
@@ -843,7 +875,9 @@ a {
   min-height: 92px;
   padding: 18px;
   font-weight: 800;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .tech-card i {
@@ -869,7 +903,9 @@ a {
   place-items: center;
   padding: 24px;
   text-align: center;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .team-card i {
@@ -988,7 +1024,11 @@ a {
 .analysis-loading {
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: linear-gradient(150deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08));
+  background: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.22),
+    rgba(255, 255, 255, 0.08)
+  );
   box-shadow: 0 22px 70px rgba(3, 56, 76, 0.22);
   backdrop-filter: blur(18px);
 }
@@ -1093,7 +1133,10 @@ a {
   border-radius: 8px;
   outline: none;
   background: rgba(255, 255, 255, 0.8);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
 .form-grid input:focus,
@@ -1283,7 +1326,9 @@ a {
 .reveal {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 
 .reveal.visible {
@@ -1307,7 +1352,7 @@ a {
     padding: 18px;
     border: 1px solid var(--border);
     border-radius: 8px;
-  background: rgba(255, 255, 255, 0.94);
+    background: rgba(255, 255, 255, 0.94);
     box-shadow: var(--shadow);
     backdrop-filter: blur(18px);
     transform: translateY(-12px);
