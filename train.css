@@ -291,7 +291,7 @@ a {
 .section-heading p,
 .about-card p,
 .footer p {
-  color: #ffffff;
+  color: var(--navy) !important;
   line-height: 1.7;
   font-size: 25px;
 }
@@ -1076,7 +1076,7 @@ a {
 .maintenance-hero-content p {
   max-width: 790px;
   margin-top: 20px;
-  color: #ffffff;
+  color: var(--navy) !important;
   font-size: 1.22rem;
   line-height: 1.7;
 }
@@ -1117,7 +1117,7 @@ a {
 .score-card span,
 .risk-card span,
 .report-header span {
-  color: #ffffff;
+  color: var(--navy) !important;
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.08em;
