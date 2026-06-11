@@ -627,7 +627,7 @@
       </div>
 
       <!-- ── NTES live delay strip ──────────────────────────────── -->
-      <div class="ntes-strip reveal">
+      <div class="ntes-strip reveal" id="ntes">
         <div class="ntes-strip-header">
           <span
             ><i
@@ -1128,7 +1128,7 @@
 
     <script src="train.js"></script>
     <script>
-      const API = "https://railmindbackend-production.up.railway.app";
+      const API = "https://railmindbackend-production.up.railway.app"; // Change to deployed API URL
       let forecastChartInst = null;
       let heatmapChartInst = null;
       let selectedStation = null;
@@ -1287,13 +1287,33 @@
         return "fa-triangle-exclamation";
       }
 
-      // ── Render NTES delay strip ──────────────────────────────────────────
-      function renderNTESStrip() {
+      // ── Render NTES delay strip (filters to trains serving selected station) ─
+      function renderNTESStrip(stationCode) {
         const body = document.getElementById("ntesStripBody");
         const ts = document.getElementById("ntesUpdatedAt");
 
-        // Show 4 representative trains
-        const trains = TRAIN_DELAYS.slice(0, 4);
+        // Filter trains that pass through or originate/terminate at this station.
+        // Falls back to first 4 if no match (e.g. on initial load before station selected).
+        let trains = stationCode
+          ? TRAIN_DELAYS.filter(
+              (t) => t.src === stationCode || t.dst === stationCode,
+            )
+          : [];
+
+        // If fewer than 2 relevant trains, pad with general network trains
+        if (trains.length < 2) {
+          const others = TRAIN_DELAYS.filter(
+            (t) => t.src !== stationCode && t.dst !== stationCode,
+          );
+          trains = [...trains, ...others].slice(0, 4);
+        } else {
+          trains = trains.slice(0, 4);
+        }
+
+        const stationLabel = stationCode
+          ? `Trains serving ${stationCode}`
+          : "Network overview";
+
         body.innerHTML = trains
           .map(
             (t) => `
@@ -1312,13 +1332,13 @@
           .join("");
 
         const now = new Date();
-        ts.textContent = `Updated ${now.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })} · NTES community dataset`;
+        ts.textContent = `${stationLabel} · Updated ${now.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}`;
 
         // Try fetching real live data from backend (non-fatal)
-        tryLiveNTESFetch();
+        tryLiveNTESFetch(stationCode);
       }
 
-      async function tryLiveNTESFetch() {
+      async function tryLiveNTESFetch(stationCode) {
         try {
           const res = await fetch(`${API}/crowd/ntes/delays`, {
             signal: AbortSignal.timeout(5000),
@@ -1330,8 +1350,19 @@
           const body = document.getElementById("ntesStripBody");
           const ts = document.getElementById("ntesUpdatedAt");
 
-          body.innerHTML = data.trains
-            .slice(0, 4)
+          // Filter live results to station too
+          let liveTrains = stationCode
+            ? data.trains.filter(
+                (t) =>
+                  t.src === stationCode ||
+                  t.dst === stationCode ||
+                  t.current_station_code === stationCode,
+              )
+            : data.trains;
+          if (liveTrains.length < 2) liveTrains = data.trains;
+          liveTrains = liveTrains.slice(0, 4);
+
+          body.innerHTML = liveTrains
             .map(
               (t) => `
             <div class="ntes-train-card">
@@ -1471,6 +1502,7 @@
           document.getElementById("loadingPanel").style.display = "none";
           renderDashboard(forecast, heatmap, platforms, annualMillion, zone);
           renderPlatforms(forecast.platform_allocation || []);
+          renderNTESStrip(code); // update delay strip to show trains for this station
 
           if (forecast.advisory) {
             document.getElementById("advisoryText").textContent =
@@ -1596,7 +1628,7 @@
 
         document.getElementById("dashboardSection").style.display = "block";
         document
-          .getElementById("dashboardSection")
+          .getElementById("ntes")
           .scrollIntoView({ behavior: "smooth", block: "start" });
 
         // Stamp the fetch time so user can see data is fresh
@@ -1802,7 +1834,7 @@
       }
 
       // ── Init ─────────────────────────────────────────────────────────────
-      renderNTESStrip();
+      renderNTESStrip(null); // initial — show network overview before station is picked
       loadStations();
 
       // Auto-refresh active station every 10 minutes so data never goes stale
